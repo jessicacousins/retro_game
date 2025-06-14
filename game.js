@@ -27,7 +27,25 @@ const pickup = document.getElementById("pickup");
 const hit = document.getElementById("hit");
 const shieldSound = document.getElementById("shieldSound");
 bgm.volume = 0.5;
-bgm.play();
+
+const gameOverSound = document.getElementById("gameOverSound");
+const newHighScoreSound = document.getElementById("newHighScoreSound");
+
+window.addEventListener("load", () => {
+  // Start music after user interaction (required by browser)
+  document.body.addEventListener("click", startMusicOnce, { once: true });
+});
+
+function startMusicOnce() {
+  bgm
+    .play()
+    .then(() => {
+      toggleBtn.textContent = "🔊 Music: On";
+    })
+    .catch(() => {
+      toggleBtn.textContent = "🔇 Music: Off (Click)";
+    });
+}
 
 function drawCritter() {
   ctx.drawImage(
@@ -157,13 +175,41 @@ function updateGame() {
 
 function endGame() {
   isGameOver = true;
-  if (score > bestScore) {
+
+  const isNewHighScore = score > bestScore;
+
+  if (isNewHighScore) {
     localStorage.setItem("bestScore", score);
     document.getElementById("best").textContent = score;
+    newHighScoreSound.play();
+    flashScreen("gold");
+  } else {
+    gameOverSound.play();
+    flashScreen("red");
   }
+
   setTimeout(() => {
-    alert("💥 Game Over! Final score: " + score);
-  }, 100);
+    alert(
+      `💥 Game Over! Final score: ${score}${
+        isNewHighScore ? " 🎉 NEW BEST!" : ""
+      }`
+    );
+  }, 300);
+}
+
+function flashScreen(color) {
+  const flash = document.createElement("div");
+  flash.style.position = "fixed";
+  flash.style.top = "0";
+  flash.style.left = "0";
+  flash.style.width = "100vw";
+  flash.style.height = "100vh";
+  flash.style.backgroundColor = color;
+  flash.style.opacity = "0.7";
+  flash.style.zIndex = "999";
+  flash.style.pointerEvents = "none";
+  document.body.appendChild(flash);
+  setTimeout(() => flash.remove(), 300);
 }
 
 // keyboard movement
@@ -196,8 +242,18 @@ document.getElementById("restartBtn").onclick = () => {
   stars = [];
   shields = [];
   hasShield = false;
-  bgm.play();
   updateGame();
 };
 
 updateGame();
+
+const toggleBtn = document.getElementById("toggleMusicBtn");
+toggleBtn.addEventListener("click", () => {
+  if (bgm.paused) {
+    bgm.play();
+    toggleBtn.textContent = "🔊 Music: On";
+  } else {
+    bgm.pause();
+    toggleBtn.textContent = "🔇 Music: Off";
+  }
+});
