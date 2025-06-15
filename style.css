@@ -54,7 +54,8 @@ canvas {
 }
 
 .scoreboard p {
-  margin: 8px 0;
+  margin: 6px 0;
+  font-size: 16px;
 }
 
 .scoreboard button,
