@@ -259,3 +259,33 @@ toggleBtn.addEventListener("click", () => {
     toggleBtn.textContent = "🔇 Music: Off";
   }
 });
+
+// Sound Control Panel
+const panel = document.getElementById("soundControlPanel");
+document.getElementById("openControlPanel").onclick = () => {
+  panel.style.display = "block";
+};
+
+function closeControlPanel() {
+  panel.style.display = "none";
+}
+
+// volume Sliders
+const musicSlider = document.getElementById("musicVolume");
+const fxSlider = document.getElementById("fxVolume");
+
+// defaults
+musicSlider.value = bgm.volume;
+fxSlider.value = pickup.volume;
+
+// update volumes
+musicSlider.addEventListener("input", () => {
+  bgm.volume = parseFloat(musicSlider.value);
+});
+
+fxSlider.addEventListener("input", () => {
+  const fxVolume = parseFloat(fxSlider.value);
+  [pickup, hit, shieldSound, gameOverSound, newHighScoreSound].forEach(
+    (sfx) => (sfx.volume = fxVolume)
+  );
+});
