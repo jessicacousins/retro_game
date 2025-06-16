@@ -289,3 +289,40 @@ fxSlider.addEventListener("input", () => {
     (sfx) => (sfx.volume = fxVolume)
   );
 });
+
+// Mute-All  (press 'M')
+document.addEventListener("keydown", (e) => {
+  if (e.key.toLowerCase() === "m") {
+    const allSounds = [
+      bgm,
+      pickup,
+      hit,
+      shieldSound,
+      gameOverSound,
+      newHighScoreSound,
+    ];
+    const isMuted = allSounds.every((sound) => sound.muted);
+
+    allSounds.forEach((sound) => {
+      sound.muted = !isMuted;
+    });
+
+    const msg = isMuted ? "🔊 All sounds unmuted" : "🔇 All sounds muted";
+    console.log(msg);
+
+    // visual feedback on screen
+    const flash = document.createElement("div");
+    flash.textContent = msg;
+    flash.style.position = "fixed";
+    flash.style.bottom = "20px";
+    flash.style.left = "50%";
+    flash.style.transform = "translateX(-50%)";
+    flash.style.padding = "8px 16px";
+    flash.style.backgroundColor = "#000";
+    flash.style.color = "#fff";
+    flash.style.borderRadius = "6px";
+    flash.style.zIndex = 2000;
+    document.body.appendChild(flash);
+    setTimeout(() => flash.remove(), 1500);
+  }
+});
