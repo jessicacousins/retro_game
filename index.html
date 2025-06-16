@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cosmic Critter Redux</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cosmic Critter — Hyper Edition</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -25,22 +25,31 @@
 
       <!-- CENTER PANEL -->
       <main class="center-panel">
-        <canvas id="gameCanvas" width="400" height="600"></canvas>
+        <!-- mobile HUD floats here -->
+        <div id="mobileHUD">
+          <span id="hudScore">0</span> pts • <span id="hudLives">0</span> ♥
+        </div>
+
+        <div id="gameWrapper">
+          <canvas id="gameCanvas" width="400" height="600"></canvas>
+        </div>
       </main>
 
       <!-- RIGHT PANEL -->
       <aside class="right-panel">
-        <h1 class="gameTitle">Cosmic Critter Redux</h1>
-        <button id="toggleMusicBtn">🔊 Music: On</button>
-        <p style="font-size: 0.85rem">
-          ←/→ or A/D to move<br />
-          Space to fire | M to mute<br />
-          Hold-Shift = Hyper Dash
+        <h1 class="gameTitle">Cosmic Critter — Hyper Edition</h1>
+
+        <p class="help">
+          ←/→ or A/D = move<br />
+          Space = fire &nbsp;•&nbsp; Shift = dash<br />
+          M = mute • R = restart<br />
+          ✦ Catch the neon cube (after 3 min) to unlock your
+          <em>Side-kick Drone</em>.
         </p>
       </aside>
     </div>
 
-    <!-- AUDIO -->
+    <!-- AUDIO -->
     <audio id="bgm" src="bgm.mp3" loop></audio>
     <audio id="pickup" src="pickup.mp3"></audio>
     <audio id="hit" src="hit.mp3"></audio>
@@ -53,6 +62,7 @@
     <!-- SOUND PANEL -->
     <div id="soundControlPanel" class="control-panel">
       <h3>Sound Settings</h3>
+      <button id="toggleMusicBtn">🔊 Music: On</button>
       <label
         >Music <input type="range" min="0" max="1" step="0.01" id="musicVolume"
       /></label>
