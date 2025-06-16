@@ -3,56 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cosmic Critter Dash</title>
+    <title>Cosmic Critter Redux</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="game-layout">
+      <!-- LEFT PANEL -->
       <aside class="left-panel">
         <div class="scoreboard">
-          <p>Score: <span id="score">0</span></p>
-          <p>Best: <span id="best">0</span></p>
-          <p>Lives: <span id="lives">0</span></p>
-          <p>Most Lives: <span id="mostLives">0</span></p>
-          <button id="restartBtn">Restart</button>
+          <p>Score <span id="score">0</span></p>
+          <p>Best <span id="best">0</span></p>
+          <p>Lives <span id="lives">0</span></p>
+          <p>Energy <span id="energy">100</span></p>
+          <p>Mult <span id="multiplier">1×</span></p>
+          <p>Most Lives <span id="mostLives">0</span></p>
+          <button id="restartBtn">Restart ( R )</button>
         </div>
+        <hr />
+        <ul id="achievementList" class="achievements"></ul>
       </aside>
 
+      <!-- CENTER PANEL -->
       <main class="center-panel">
         <canvas id="gameCanvas" width="400" height="600"></canvas>
       </main>
 
+      <!-- RIGHT PANEL -->
       <aside class="right-panel">
-        <h1 class="gameTitle">Cosmic Critter Dash</h1>
-        <div class="music-controls">
-          <button id="toggleMusicBtn">🔊 Music: On</button>
-          <p>Press the "M" key to Mute ALL</p>
-        </div>
+        <h1 class="gameTitle">Cosmic Critter Redux</h1>
+        <button id="toggleMusicBtn">🔊 Music: On</button>
+        <p style="font-size: 0.85rem">
+          ←/→ or A/D to move<br />
+          Space to fire | M to mute<br />
+          Hold-Shift = Hyper Dash
+        </p>
       </aside>
     </div>
 
+    <!-- AUDIO -->
     <audio id="bgm" src="bgm.mp3" loop></audio>
     <audio id="pickup" src="pickup.mp3"></audio>
     <audio id="hit" src="hit.mp3"></audio>
     <audio id="shieldSound" src="shield.mp3"></audio>
-
+    <audio id="laserSound" src="laser.mp3"></audio>
+    <audio id="explodeSound" src="explode.mp3"></audio>
     <audio id="gameOverSound" src="gameover.mp3"></audio>
     <audio id="newHighScoreSound" src="highscore.mp3"></audio>
 
-    <!-- Sound Control Panel -->
+    <!-- SOUND PANEL -->
     <div id="soundControlPanel" class="control-panel">
       <h3>Sound Settings</h3>
       <label
-        >Music Volume:
-        <input type="range" min="0" max="1" step="0.01" id="musicVolume"
+        >Music <input type="range" min="0" max="1" step="0.01" id="musicVolume"
       /></label>
       <label
-        >FX Volume:
-        <input type="range" min="0" max="1" step="0.01" id="fxVolume"
+        >SFX <input type="range" min="0" max="1" step="0.01" id="fxVolume"
       /></label>
       <button onclick="closeControlPanel()">Close</button>
     </div>
-    <button id="openControlPanel">🎚️ Sound Settings</button>
+    <button id="openControlPanel">🎚️</button>
 
     <script src="game.js"></script>
   </body>
