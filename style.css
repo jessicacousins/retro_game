@@ -17,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  letter-spacing: 2px;
 }
 
 /* Layout */
