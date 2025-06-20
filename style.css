@@ -210,6 +210,13 @@ canvas {
   margin-top: 4px;
 }
 
+.close-button {
+  color: #000;
+  background-color: #fd8a93;
+  padding: 3px 6px;
+  border-radius: 2px;
+}
+
 @media (min-width: 601px) {
   .right-panel {
     width: 250px;
